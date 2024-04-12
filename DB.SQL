@@ -36,6 +36,7 @@ create table if not exists TIENDA.cliente(
 create table if not exists TIENDA.venta(
 	id_venta INT NOT NULL auto_increment,
     fecha varchar(25) not null,
+    id_empleado varchar(25) not null,
     id_cliente varchar(15)not null,
     compra_total varchar(6)not null,
     PRiMARY KEY (id_venta)
