@@ -49,3 +49,8 @@ create table if not exists TIENDA.factura(
     id_venta varchar(15)not null,
     PRiMARY KEY (id_factura)
 )
+ALTER table tienda.venta add foreign key (id_cliente) references tienda.cliente(id_cliente) ON UPDATE CASCADE ON DELETE CASCADE
+ALTER table tienda.venta add foreign key (id_empleado) references tienda.empleado(id_empleado) ON UPDATE CASCADE ON DELETE CASCADE
+ALTER table tienda.factura add foreign key (id_cliente) references tienda.cliente(id_cliente) ON UPDATE CASCADE ON DELETE CASCADE
+ALTER table tienda.factura add foreign key (id_producto) references tienda.producto(id_producto) ON UPDATE CASCADE ON DELETE CASCADE
+ALTER table tienda.factura add foreign key (id_venta) references tienda.venta(id_venta) ON UPDATE CASCADE ON DELETE CASCADE
