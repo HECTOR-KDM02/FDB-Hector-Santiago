@@ -8,7 +8,7 @@ create table if not exists tienda.empleado(
     telefono varchar(10)not null,
     direccion varchar(100) not null,
     fecha_contratacion varchar(50) NOT NULL,
-    cargo enum('Gerente','Administrador','Empleado','Limpieza')
+    cargo enum('Gerente','Administrador','Empleado','Limpieza'),
     turno enum('matutino','vespertino'),
     PRiMARY KEY (id_empleado)
 )
