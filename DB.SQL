@@ -9,10 +9,9 @@ create table if not exists tienda.empleado(
     direccion varchar(100) not null,
     fecha_contratacion varchar(50) NOT NULL,
     cargo enum('Gerente','Administrador','Empleado','Limpieza'),
-    turno enum('matutino','vespertino'),
+    turnos enum('matutino','vespertino'),
     PRiMARY KEY (id_empleado)
-)
-
+);
 create table if not exists tienda.producto(
 	id_producto INT NOT NULL auto_increment,
     nombrep varchar(50) not null,
@@ -21,39 +20,58 @@ create table if not exists tienda.producto(
     precio_venta varchar(10)not null,
     Fecha_Caducidad varchar(50) not null,
     PRiMARY KEY (id_producto)
-)
-
+);
 create table if not exists tienda.cliente(
 	id_cliente INT NOT NULL auto_increment,
     nombrec varchar(50) not null,
-    edad varchar(3)not null,
+    edad INT (3)not null,
     email varchar(50)not null,
-    telefono varchar(10)not null,
+    telefono INT (10)not null,
     miembro enum('si','no'),
     PRiMARY KEY (id_cliente)
-)
-
+);
 create table if not exists tienda.venta(
 	id_venta INT NOT NULL auto_increment,
     fecha varchar(25) not null,
-    id_empleado varchar(25) not null,
-    id_cliente varchar(15)not null,
-    compra_total varchar(6)not null,
+    id_empleado INT not null,
+    id_cliente INT not null,
+    compra_total INT (10)not null,
     PRiMARY KEY (id_venta)
-)
-
+);
 create table if not exists tienda.factura(
 	id_factura INT NOT NULL auto_increment,
-    id_cliente varchar(15) not null,
-    id_producto varchar(15)not null,
-    id_venta varchar(15)not null,
+    id_cliente INT not null ,
+    id_producto INT not null,
+    id_venta INT not null,
     PRiMARY KEY (id_factura)
-)
-ALTER table tienda.venta add foreign key (id_cliente) references tienda.cliente(id_cliente) ON UPDATE CASCADE ON DELETE CASCADE
-ALTER table tienda.venta add foreign key (id_empleado) references tienda.empleado(id_empleado) ON UPDATE CASCADE ON DELETE CASCADE
-ALTER table tienda.factura add foreign key (id_cliente) references tienda.cliente(id_cliente) ON UPDATE CASCADE ON DELETE CASCADE
-ALTER table tienda.factura add foreign key (id_producto) references tienda.producto(id_producto) ON UPDATE CASCADE ON DELETE CASCADE
-ALTER table tienda.factura add foreign key (id_venta) references tienda.venta(id_venta) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+
+ALTER TABLE tienda.venta
+ADD foreign key (id_cliente) 
+references tienda.cliente(id_cliente) 
+ON UPDATE CASCADE on delete CASCADE;
+
+ALTER table tienda.venta 
+add foreign key (id_empleado) 
+references tienda.empleado(id_empleado) 
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER table tienda.factura 
+add foreign key (id_cliente) 
+references tienda.cliente(id_cliente) 
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER table tienda.factura 
+add foreign key (id_producto) 
+references tienda.producto(id_producto) 
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER table tienda.factura 
+add foreign key (id_venta) 
+references tienda.venta(id_venta) 
+ON UPDATE CASCADE ON DELETE CASCADE;
 
 INSERT INTO tienda.empleado (nombree, edad, email, telefono, direccion, fecha_contratacion, cargo, turno) 
 VALUES 
