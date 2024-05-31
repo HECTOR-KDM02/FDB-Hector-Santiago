@@ -2,15 +2,20 @@ CREATE DATABASE IF NOT EXISTS tienda;
 
 CREATE TABLE IF NOT EXISTS tienda.empleado (
     id_empleado INT NOT NULL AUTO_INCREMENT,
+    fecha_contratacion DATE NOT NULL,
+    id_persona INT NOT NULL,
+    cargo ENUM('Gerente', 'Administrador', 'Empleado', 'Limpieza'),
+    turno ENUM('matutino', 'vespertino'),
+    PRIMARY KEY (id_empleado),
+    FOREIGN KEY(id_persona)REFERENCES tienda.persona(id_persona) ON UPDATE CASCADE ON DELETE CASCADE,
+);
+CREATE TABLE if NOT EXISTS tienda.persona(
+    id_persona INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
     edad INT(3) NOT NULL,
     email VARCHAR(50) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
-    fecha_contratacion DATE NOT NULL,
-    cargo ENUM('Gerente', 'Administrador', 'Empleado', 'Limpieza'),
-    turno ENUM('matutino', 'vespertino'),
-    PRIMARY KEY (id_empleado)
 );
 
 CREATE TABLE IF NOT EXISTS tienda.producto (
@@ -25,12 +30,10 @@ CREATE TABLE IF NOT EXISTS tienda.producto (
 
 CREATE TABLE IF NOT EXISTS tienda.cliente (
     id_cliente INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL,
-    edad INT(3) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    telefono VARCHAR(15) NOT NULL,
+    id_persona INT NOT NULL,
     miembro ENUM('si', 'no'),
-    PRIMARY KEY (id_cliente)
+    PRIMARY KEY (id_cliente),
+    FOREIGN KEY(id_persona)REFERENCES tienda.persona(id_persona) ON UPDATE CASCADE ON DELETE CASCADE,
 );
 
 CREATE TABLE IF NOT EXISTS tienda.venta (
